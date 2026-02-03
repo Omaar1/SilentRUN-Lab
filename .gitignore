@@ -35,3 +35,6 @@ Desktop.ini
 # User Specific
 .vscode/
 *.user
+
+!sharedscripts/services/SCCM/DeploymentConfigTemplate.xml
+!sharedscripts/services/SCCM/extendSchema/*.dll
