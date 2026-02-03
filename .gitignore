@@ -1,0 +1,37 @@
+# Vagrant
+.vagrant/
+*.box
+
+# Lab Artifacts & Junk
+junk/
+autolab/
+vulns/
+*.log
+*.txt
+*.xml
+*.html
+*.evtx
+
+# Large Binaries & ISOs
+*.code-workspace
+*.iso
+*.vhdx
+*.vdi
+*.vmdk
+MEM_Configmgr_Eval.exe
+**/Media/
+**/Prereqs/
+**/sxs/
+*.cab
+*.msu
+*.msp
+*.dll
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# User Specific
+.vscode/
+*.user
