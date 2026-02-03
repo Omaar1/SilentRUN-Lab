@@ -18,6 +18,7 @@ Before running the lab, ensure the following are installed:
 
 1.  **VirtualBox**: The hypervisor used to run the VMs.
 2.  **Vagrant**: Only the `vagrant` CLI tool is needed.
+    *   *Quick Install (PowerShell):* `winget install --id HashiCorp.Vagrant -e --source winget`
 3.  **Vagrant Plugins**:
     *   `vagrant-winrm`: Enables communication with Windows VMs.
     *   `vagrant-windows-sysprep`: Handles Windows initialization.
