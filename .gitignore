@@ -38,3 +38,5 @@ Desktop.ini
 
 !sharedscripts/services/SCCM/DeploymentConfigTemplate.xml
 !sharedscripts/services/SCCM/extendSchema/*.dll
+!sharedscripts/services/SCCM/sxs/
+!sharedscripts/services/SCCM/sxs/*.cab
