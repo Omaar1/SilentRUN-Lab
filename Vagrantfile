@@ -161,35 +161,35 @@ Vagrant.configure("2") do |cfg|
       # PHASE 1: INITIAL SYSTEM SETUP
       # ========================================================================
       
-      # # Sysprep: Generate unique SID (required for domain join, prevents SID conflicts)
-      # config.vm.provision "windows-sysprep"
-      # config.vm.provision "shell", reboot: true
+      # Sysprep: Generate unique SID (required for domain join, prevents SID conflicts)
+      config.vm.provision "windows-sysprep"
+      config.vm.provision "shell", reboot: true
       
-      # # Configure regional settings: keyboard layout, language, timezone
-      # config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/windows/provision-base.ps1"
+      # Configure regional settings: keyboard layout, language, timezone
+      config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/windows/provision-base.ps1"
 
-      # # Disable Windows license service to prevent automatic VM shutdown after 180 days
-      # config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/windows/disable-license-service.ps1"  
+      # Disable Windows license service to prevent automatic VM shutdown after 180 days
+      config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/windows/disable-license-service.ps1"  
       
-      # # ========================================================================
-      # # PHASE 2: DOMAIN JOIN
-      # # ========================================================================
+      # ========================================================================
+      # PHASE 2: DOMAIN JOIN
+      # ========================================================================
       
-      # # Join the SCCM server to SILENT.silent.run domain (uses forest-variables.json for credentials)
-      # config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/ad/join-domain.ps1 forest-variables.json"
-      # config.vm.provision "shell", reboot: true
+      # Join the SCCM server to SILENT.silent.run domain (uses forest-variables.json for credentials)
+      config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/ad/join-domain.ps1 forest-variables.json"
+      config.vm.provision "shell", reboot: true
 
-      # # ========================================================================
-      # # PHASE 3: SCCM PREREQUISITES
-      # # ========================================================================
+      # ========================================================================
+      # PHASE 3: SCCM PREREQUISITES
+      # ========================================================================
       
-      # # Create required AD accounts for SCCM: sccm_admin, sccm_naa, sccm_cp, sccm_dj
-      # # These accounts are used for various SCCM operations and client push
-      # config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/services/SCCM/prepareSccmAccounts.ps1 forest-variables.json"
+      # Create required AD accounts for SCCM: sccm_admin, sccm_naa, sccm_cp, sccm_dj
+      # These accounts are used for various SCCM operations and client push
+      config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/services/SCCM/prepareSccmAccounts.ps1 forest-variables.json"
       
-      # # Install Windows Server roles/features required by SCCM:
-      # # - IIS, BITS, RDC, .NET Framework 3.5, Remote Differential Compression
-      # config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/services/SCCM/installDepRoles.ps1"
+      # Install Windows Server roles/features required by SCCM:
+      # - IIS, BITS, RDC, .NET Framework 3.5, Remote Differential Compression
+      config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/services/SCCM/installDepRoles.ps1"
       
       # Install Windows Assessment and Deployment Kit (ADK):
       # - Required for OS deployment, boot images, and USMT
