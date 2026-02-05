@@ -179,12 +179,12 @@ Vagrant.configure("2") do |cfg|
       config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/ad/join-domain.ps1 forest-variables.json"
       config.vm.provision "shell", reboot: true
 
-      # ========================================================================
-      # PHASE 3: SCCM PREREQUISITES
-      # ========================================================================
+      # # ========================================================================
+      # # PHASE 3: SCCM PREREQUISITES
+      # # ========================================================================
       
-      # Create required AD accounts for SCCM: sccm_admin, sccm_naa, sccm_cp, sccm_dj
-      # These accounts are used for various SCCM operations and client push
+      # # Create required AD accounts for SCCM: sccm_admin, sccm_naa, sccm_cp, sccm_dj
+      # # These accounts are used for various SCCM operations and client push
       config.vm.provision "shell", path: "sharedscripts/ps.ps1", args: "sharedscripts/services/SCCM/prepareSccmAccounts.ps1 forest-variables.json"
       
       # Install Windows Server roles/features required by SCCM:

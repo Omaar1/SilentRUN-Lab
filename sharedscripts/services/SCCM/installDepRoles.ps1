@@ -50,9 +50,30 @@ catch {
 Start-PhaseTimer -PhaseName "INSTALLING .NET FRAMEWORK 3.5"
 
 try {
-    Write-Host "Installing .NET Framework 3.5 from Windows Update..."
-    DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
-    Write-Host ".NET Framework 3.5 installed successfully."
+
+    $LocalSource = "C:\vagrant\sharedscripts\services\SCCM\sxs" 
+    
+
+    Write-Host "Verifying Source Path: $LocalSource" -ForegroundColor Cyan
+
+    if (-not (Test-Path $LocalSource)) {
+        Write-Error "STOP: The source folder '$LocalSource' does not exist."
+        Write-Host "You must copy the 'sxs' folder or the .NET .cab file here first."
+        exit 1
+    }
+
+    if (-not (Get-ChildItem -Path $LocalSource -Filter "*.cab")) {
+        Write-Error "STOP: The folder exists but contains no .cab files."
+        exit 1
+    }
+
+    Write-Host "Path Valid. Attempting Offline Install..." -ForegroundColor Green
+
+    # The /LimitAccess flag is KEY. It forbids checking Windows Update.
+    # We use DISM directly because it respects /LimitAccess better than PowerShell in some versions.
+    $DismArgs = "/Online /Enable-Feature /FeatureName:NetFx3 /All /Source:`"$LocalSource`" /LimitAccess"
+
+    Start-Process -FilePath "dism.exe" -ArgumentList $DismArgs -Wait -NoNewWindow
     Stop-PhaseTimer -Status Success
 }
 catch {
